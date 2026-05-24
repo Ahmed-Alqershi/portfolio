@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <defs>
+    <filter id="dotGlow" x="-140%" y="-140%" width="380%" height="380%">
+      <feGaussianBlur stdDeviation="24" result="blur"/>
+      <feColorMatrix in="blur" type="matrix"
+        values="0.35 0 0 0 0.03
+                0 0.20 0 0 0.02
+                0 0 1.00 0 0.55
+                0 0 0 0.85 0" result="glow"/>
+      <feMerge>
+        <feMergeNode in="glow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <style>
+      .bg { fill: #080807; }
+      .white { fill: #F7F7F2; }
+      .violet { fill: #5747FF; }
+    </style>
+  </defs>
+
+  <rect class="bg" width="1600" height="900"/>
+
+  <!-- Left outer A stroke: pulled slightly outward to give the diagonals more breathing room -->
+  <polygon class="white" points="420,700 535,700 755,300 685,300"/>
+
+  <!-- Left inner stroke: subtle hidden M rhythm -->
+  <polygon class="white" points="560,700 660,700 805,425 760,340"/>
+
+  <!-- Right inner stroke: mirrors the hidden M rhythm -->
+  <polygon class="white" points="940,700 1040,700 840,340 795,425"/>
+
+  <!-- Right outer A stroke -->
+  <polygon class="white" points="1065,700 1180,700 915,300 845,300"/>
+
+  <!-- Small lower alignment cuts / feet, keeping the mark grounded like the original -->
+  <polygon class="white" points="415,700 660,700 620,735 390,735"/>
+  <polygon class="white" points="940,700 1185,700 1210,735 980,735"/>
+
+  <!-- Larger apex dot, close enough to feel magnetically held, but not touching the white shapes -->
+  <circle class="violet" cx="800" cy="220" r="64" filter="url(#dotGlow)"/>
+
+  <!-- Very soft invisible-to-subtle aura zone, suggesting the dot is suspended by the shapes' energy -->
+  <ellipse cx="800" cy="295" rx="116" ry="36" fill="#5747FF" opacity="0.08" filter="url(#dotGlow)"/>
+</svg>
