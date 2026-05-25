@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { motion, AnimatePresence, useScroll, useTransform } from "motion/react";
 
 const NAME = "Ahmed Alqershi";
@@ -101,14 +101,21 @@ export default function Hero() {
           aria-label={NAME}
           className="font-mono text-5xl font-medium tracking-[-0.04em] sm:text-7xl"
         >
-          {NAME.split("").map((ch, i) => (
-            <motion.span
-              key={i}
-              variants={letter}
-              className="inline-block whitespace-pre"
-            >
-              {ch}
-            </motion.span>
+          {NAME.split(" ").map((word, wi) => (
+            <Fragment key={wi}>
+              {wi > 0 && " "}
+              <span className="inline-block whitespace-nowrap">
+                {word.split("").map((ch, ci) => (
+                  <motion.span
+                    key={ci}
+                    variants={letter}
+                    className="inline-block"
+                  >
+                    {ch}
+                  </motion.span>
+                ))}
+              </span>
+            </Fragment>
           ))}
         </motion.h1>
 

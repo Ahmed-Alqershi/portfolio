@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion } from "motion/react";
+import { motion, AnimatePresence } from "motion/react";
 
 const LINKS = [
   { href: "#about", label: "About" },
@@ -16,6 +16,7 @@ const LINKS = [
 export default function Nav() {
   const [visible, setVisible] = useState(false);
   const [active, setActive] = useState<string>("");
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => {
@@ -36,10 +37,7 @@ export default function Nav() {
       (entries) => {
         const visible = entries
           .filter((e) => e.isIntersecting)
-          .sort(
-            (a, b) =>
-              b.intersectionRatio - a.intersectionRatio,
-          )[0];
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
         if (visible) setActive(`#${visible.target.id}`);
       },
       {
@@ -53,6 +51,7 @@ export default function Nav() {
 
   const scrollTo = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
+    setMobileOpen(false);
     const el = document.querySelector(href);
     if (!el) return;
     const lenis = window.__lenis;
@@ -84,6 +83,7 @@ export default function Nav() {
           >
             <span className="h-2 w-2 rounded-full bg-accent" />
           </a>
+
           <ul className="hidden items-center gap-1 sm:flex">
             {LINKS.map((l) => {
               const isActive = active === l.href;
@@ -126,14 +126,79 @@ export default function Nav() {
               );
             })}
           </ul>
-          <a
-            href="#contact"
-            onClick={(e) => scrollTo(e, "#contact")}
-            className="rounded-full bg-foreground px-3 py-1 font-mono text-xs uppercase tracking-[0.15em] text-background btn-lift sm:hidden"
+
+          <button
+            type="button"
+            onClick={() => setMobileOpen((v) => !v)}
+            aria-label={mobileOpen ? "Close menu" : "Open menu"}
+            aria-expanded={mobileOpen}
+            className="flex h-7 w-7 items-center justify-center text-foreground sm:hidden"
           >
-            Contact
-          </a>
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden
+            >
+              {mobileOpen ? (
+                <>
+                  <path d="M6 6l12 12" />
+                  <path d="M18 6l-12 12" />
+                </>
+              ) : (
+                <>
+                  <path d="M3 6h18" />
+                  <path d="M3 12h18" />
+                  <path d="M3 18h18" />
+                </>
+              )}
+            </svg>
+          </button>
         </nav>
+
+        <AnimatePresence>
+          {mobileOpen && (
+            <motion.ul
+              key="mobile-menu"
+              initial={{ opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
+              className="mt-2 overflow-hidden rounded-2xl border border-border/80 bg-background/95 p-2 backdrop-blur-xl sm:hidden"
+            >
+              {LINKS.map((l) => {
+                const isContact = l.href === "#contact";
+                const isDetour = l.href === "#detour";
+                return (
+                  <li key={l.href}>
+                    <a
+                      href={l.href}
+                      onClick={(e) => scrollTo(e, l.href)}
+                      className={`flex items-center gap-2 rounded-lg px-4 py-2.5 font-mono text-xs uppercase tracking-[0.15em] transition-colors ${
+                        isContact
+                          ? "bg-accent text-background"
+                          : "text-foreground hover:bg-foreground/[0.06]"
+                      }`}
+                    >
+                      {isDetour && (
+                        <span aria-hidden className="relative flex h-1.5 w-1.5">
+                          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-70" />
+                          <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-accent" />
+                        </span>
+                      )}
+                      {l.label}
+                    </a>
+                  </li>
+                );
+              })}
+            </motion.ul>
+          )}
+        </AnimatePresence>
       </div>
     </header>
   );
