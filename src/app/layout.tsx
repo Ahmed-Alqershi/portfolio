@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, JetBrains_Mono, Instrument_Serif } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 
@@ -141,6 +143,8 @@ export default function RootLayout({
           Skip to content
         </a>
         <SmoothScroll>{children}</SmoothScroll>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
