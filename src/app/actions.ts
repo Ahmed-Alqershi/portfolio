@@ -85,14 +85,14 @@ export async function sendContact(
     return {
       status: "error",
       message:
-        "Email isn't wired up yet. Please email me directly at " + TO_EMAIL + ".",
+        "Email isn't wired up yet. Please email me directly at contact@aalqershi.com.",
     };
   }
 
   try {
     const resend = new Resend(apiKey);
     const { error } = await resend.emails.send({
-      from: "Portfolio Contact <onboarding@resend.dev>",
+      from: "Portfolio <noreply@aalqershi.com>",
       to: TO_EMAIL,
       replyTo: email,
       subject: `New portfolio message from ${name}`,

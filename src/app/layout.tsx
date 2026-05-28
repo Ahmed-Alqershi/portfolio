@@ -20,24 +20,88 @@ const instrumentSerif = Instrument_Serif({
   subsets: ["latin"],
 });
 
+const TITLE =
+  "Ahmed Alqershi — Mathematical Modelling, Machine Learning & Software";
+const DESCRIPTION =
+  "Mathematical modelling, machine learning, and the software around them. Operations research, GAMS, optimization. Things are interactive — look around.";
+
 export const metadata: Metadata = {
-  title: "Ahmed Alqershi — Modelling, ML, Software",
-  description:
-    "Personal portfolio — mathematical modelling, machine learning, and the software around them. Things are interactive — look around.",
-  authors: [{ name: "Ahmed Alqershi" }],
+  metadataBase: new URL("https://aalqershi.com"),
+  title: TITLE,
+  description: DESCRIPTION,
+  applicationName: "Ahmed Alqershi",
+  authors: [{ name: "Ahmed Alqershi", url: "https://aalqershi.com" }],
+  creator: "Ahmed Alqershi",
+  keywords: [
+    "Ahmed Alqershi",
+    "mathematical modelling",
+    "machine learning",
+    "operations research",
+    "mathematical optimization",
+    "GAMS",
+    "Gurobi",
+    "CGE modelling",
+    "computable general equilibrium",
+    "software engineering",
+    "Siamese neural networks",
+    "drug repositioning",
+    "Kaizen Consulting",
+    "consultant",
+    "freelance",
+  ],
+  alternates: { canonical: "/" },
   openGraph: {
-    title: "Ahmed Alqershi — Modelling, ML, Software",
-    description:
-      "Personal portfolio — mathematical modelling, machine learning, and the software around them. Things are interactive — look around.",
+    title: TITLE,
+    description: DESCRIPTION,
+    url: "https://aalqershi.com",
+    siteName: "Ahmed Alqershi",
     type: "website",
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Ahmed Alqershi — Modelling, ML, Software",
-    description:
-      "Personal portfolio — mathematical modelling, machine learning, and the software around them. Things are interactive — look around.",
+    title: TITLE,
+    description: DESCRIPTION,
   },
+  // After deploy, add the Search Console code here:
+  // verification: { google: "your-verification-code" },
+};
+
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Ahmed Alqershi",
+  url: "https://aalqershi.com",
+  image: "https://aalqershi.com/profile.jpeg",
+  sameAs: [
+    "https://www.linkedin.com/in/ahmed-alqershi/",
+    "https://github.com/Ahmed-Alqershi",
+  ],
+  jobTitle: ["Technical Consultant", "Operations Research Analyst"],
+  worksFor: [
+    { "@type": "Organization", name: "Kaizen Consulting" },
+    { "@type": "Organization", name: "GAMS Development Corporation" },
+  ],
+  alumniOf: {
+    "@type": "CollegeOrUniversity",
+    name: "Abdullah Gül University",
+  },
+  knowsAbout: [
+    "Mathematical Modelling",
+    "Operations Research",
+    "Machine Learning",
+    "Mathematical Optimization",
+    "GAMS",
+    "Gurobi",
+    "Computable General Equilibrium",
+    "Mixed Integer Programming",
+    "Stochastic Programming",
+    "Software Engineering",
+    "Python",
+    "TypeScript",
+  ],
+  description:
+    "Independent consultant in mathematical modelling, machine learning, and the software around them.",
 };
 
 const themeBootstrap = `
@@ -67,6 +131,12 @@ export default function RootLayout({
     >
       <body className="min-h-full">
         <script dangerouslySetInnerHTML={{ __html: themeBootstrap }} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(personSchema).replace(/</g, "\\u003c"),
+          }}
+        />
         <a href="#main" className="skip-link">
           Skip to content
         </a>

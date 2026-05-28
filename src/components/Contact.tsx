@@ -114,10 +114,10 @@ export default function Contact() {
         <p className="mt-12 text-sm text-muted">
           Or just email me at{" "}
           <a
-            href="mailto:alqershiahmed20@gmail.com"
+            href="mailto:contact@aalqershi.com"
             className="link-underline text-foreground"
           >
-            alqershiahmed20@gmail.com
+            contact@aalqershi.com
           </a>
           .
         </p>

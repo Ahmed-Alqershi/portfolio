@@ -29,24 +29,27 @@ export default function Nav() {
 
   useEffect(() => {
     const sections = LINKS.map((l) => document.querySelector(l.href)).filter(
-      (el): el is Element => el !== null,
+      (el): el is HTMLElement => el !== null,
     );
     if (sections.length === 0) return;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (visible) setActive(`#${visible.target.id}`);
-      },
-      {
-        rootMargin: "-40% 0px -40% 0px",
-        threshold: [0, 0.25, 0.5, 0.75, 1],
-      },
-    );
-    sections.forEach((s) => observer.observe(s));
-    return () => observer.disconnect();
+    // Active section = the last one whose top has scrolled above a marker
+    // line at 30% from the viewport top. Walking in document order picks it
+    // deterministically regardless of section height — IntersectionObserver
+    // with a narrow rootMargin couldn't, which caused some sections to skip.
+    const onScroll = () => {
+      const marker = window.innerHeight * 0.3;
+      let currentId: string | null = null;
+      for (const s of sections) {
+        if (s.getBoundingClientRect().top <= marker) currentId = s.id;
+        else break;
+      }
+      setActive(currentId ? `#${currentId}` : "");
+    };
+
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   const scrollTo = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {

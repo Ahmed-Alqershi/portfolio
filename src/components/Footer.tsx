@@ -57,7 +57,7 @@ export default function Footer() {
             </svg>
           </a>
           <a
-            href="mailto:alqershiahmed20@gmail.com"
+            href="mailto:contact@aalqershi.com"
             aria-label="Email"
             className="transition-colors hover:text-foreground"
           >
@@ -78,10 +78,6 @@ export default function Footer() {
           </a>
         </div>
       </div>
-
-      <p className="mx-auto mt-6 max-w-4xl text-center font-mono text-[10px] uppercase tracking-[0.2em] text-muted/60 sm:text-left">
-        Built with Next.js · Tailwind · Motion · Lenis
-      </p>
     </footer>
   );
 }
