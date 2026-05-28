@@ -22,10 +22,21 @@ const instrumentSerif = Instrument_Serif({
   subsets: ["latin"],
 });
 
+// SEO title kept as "Machine Learning" for the technical search audience.
 const TITLE =
   "Ahmed Alqershi — Mathematical Modelling, Machine Learning & Software";
+// Social title is just the name — the image and description carry the
+// positioning, so the bold line in WhatsApp/LinkedIn previews reads like a
+// clean contact card rather than a résumé summary.
+const SOCIAL_TITLE = "Ahmed Alqershi";
+// Keyword-rich for Google's meta description.
 const DESCRIPTION =
   "Mathematical modelling, machine learning, and the software around them. Operations research, GAMS, optimization. Things are interactive — look around.";
+// Warm invitation for WhatsApp/LinkedIn/Twitter previews. The image already
+// carries the name, photo, logo, and positioning — the description doesn't
+// need to repeat any of that. It just extends a hand.
+const SOCIAL_DESCRIPTION =
+  "Welcome! This is where I keep my work. Have a look around. Maybe we'll team up on something.";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://aalqershi.com"),
@@ -53,8 +64,8 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: "/" },
   openGraph: {
-    title: TITLE,
-    description: DESCRIPTION,
+    title: SOCIAL_TITLE,
+    description: SOCIAL_DESCRIPTION,
     url: "https://aalqershi.com",
     siteName: "Ahmed Alqershi",
     type: "website",
@@ -62,8 +73,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: TITLE,
-    description: DESCRIPTION,
+    title: SOCIAL_TITLE,
+    description: SOCIAL_DESCRIPTION,
   },
   // After deploy, add the Search Console code here:
   // verification: { google: "your-verification-code" },
