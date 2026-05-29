@@ -22,16 +22,20 @@ const instrumentSerif = Instrument_Serif({
   subsets: ["latin"],
 });
 
-// SEO title kept as "Machine Learning" for the technical search audience.
+// SEO title — the positioning only. The site name above the URL in Google
+// search results comes from the WebSite schema (below), so the title doesn't
+// need to repeat "Ahmed Alqershi". Same line is also what the browser tab
+// shows.
 const TITLE =
-  "Ahmed Alqershi — Mathematical Modelling, Machine Learning & Software";
+  "Mathematical Modelling, Artificial Intelligence & Software";
 // Social title is just the name — the image and description carry the
 // positioning, so the bold line in WhatsApp/LinkedIn previews reads like a
 // clean contact card rather than a résumé summary.
 const SOCIAL_TITLE = "Ahmed Alqershi";
-// Keyword-rich for Google's meta description.
+// SEO description — warm, conversational. Google may or may not use this
+// verbatim; it sometimes pulls more relevant text from the page itself.
 const DESCRIPTION =
-  "Mathematical modelling, machine learning, and the software around them. Operations research, GAMS, optimization. Things are interactive — look around.";
+  "This is where I keep my work. Have a look around. Maybe we'll team up on something.";
 // Warm invitation for WhatsApp/LinkedIn/Twitter previews. The image already
 // carries the name, photo, logo, and positioning — the description doesn't
 // need to repeat any of that. It just extends a hand.
@@ -67,7 +71,7 @@ export const metadata: Metadata = {
     title: SOCIAL_TITLE,
     description: SOCIAL_DESCRIPTION,
     url: "https://aalqershi.com",
-    siteName: "Ahmed Alqershi",
+    siteName: "Ahmed Alqershi · Portfolio",
     type: "website",
     locale: "en_US",
   },
@@ -80,41 +84,57 @@ export const metadata: Metadata = {
   // verification: { google: "your-verification-code" },
 };
 
-const personSchema = {
+const SITE_URL = "https://aalqershi.com";
+
+const structuredData = {
   "@context": "https://schema.org",
-  "@type": "Person",
-  name: "Ahmed Alqershi",
-  url: "https://aalqershi.com",
-  image: "https://aalqershi.com/profile.jpeg",
-  sameAs: [
-    "https://www.linkedin.com/in/ahmed-alqershi/",
-    "https://github.com/Ahmed-Alqershi",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": `${SITE_URL}/#website`,
+      name: "Ahmed Alqershi · Portfolio",
+      alternateName: "Ahmed Alqershi",
+      url: SITE_URL,
+      inLanguage: "en",
+      publisher: { "@id": `${SITE_URL}/#person` },
+    },
+    {
+      "@type": "Person",
+      "@id": `${SITE_URL}/#person`,
+      name: "Ahmed Alqershi",
+      url: SITE_URL,
+      image: `${SITE_URL}/profile.jpeg`,
+      sameAs: [
+        "https://www.linkedin.com/in/ahmed-alqershi/",
+        "https://github.com/Ahmed-Alqershi",
+      ],
+      jobTitle: ["Technical Consultant", "Operations Research Analyst"],
+      worksFor: [
+        { "@type": "Organization", name: "Kaizen Consulting" },
+        { "@type": "Organization", name: "GAMS Development Corporation" },
+      ],
+      alumniOf: {
+        "@type": "CollegeOrUniversity",
+        name: "Abdullah Gül University",
+      },
+      knowsAbout: [
+        "Mathematical Modelling",
+        "Operations Research",
+        "Machine Learning",
+        "Mathematical Optimization",
+        "GAMS",
+        "Gurobi",
+        "Computable General Equilibrium",
+        "Mixed Integer Programming",
+        "Stochastic Programming",
+        "Software Engineering",
+        "Python",
+        "TypeScript",
+      ],
+      description:
+        "Independent consultant in mathematical modelling, machine learning, and the software around them.",
+    },
   ],
-  jobTitle: ["Technical Consultant", "Operations Research Analyst"],
-  worksFor: [
-    { "@type": "Organization", name: "Kaizen Consulting" },
-    { "@type": "Organization", name: "GAMS Development Corporation" },
-  ],
-  alumniOf: {
-    "@type": "CollegeOrUniversity",
-    name: "Abdullah Gül University",
-  },
-  knowsAbout: [
-    "Mathematical Modelling",
-    "Operations Research",
-    "Machine Learning",
-    "Mathematical Optimization",
-    "GAMS",
-    "Gurobi",
-    "Computable General Equilibrium",
-    "Mixed Integer Programming",
-    "Stochastic Programming",
-    "Software Engineering",
-    "Python",
-    "TypeScript",
-  ],
-  description:
-    "Independent consultant in mathematical modelling, machine learning, and the software around them.",
 };
 
 const themeBootstrap = `
@@ -147,7 +167,7 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(personSchema).replace(/</g, "\\u003c"),
+            __html: JSON.stringify(structuredData).replace(/</g, "\\u003c"),
           }}
         />
         <a href="#main" className="skip-link">
