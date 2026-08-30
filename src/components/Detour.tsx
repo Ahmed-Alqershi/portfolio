@@ -525,7 +525,7 @@ export default function Detour() {
 
   return (
     <section id="detour" className="mx-auto max-w-4xl px-6 py-20 sm:py-32">
-      <SectionLabel number="06" title="Detour" />
+      <SectionLabel number="07" title="Detour" />
 
       <FadeIn>
         <div className="mb-8 max-w-xl space-y-3 text-muted">

@@ -7,6 +7,7 @@ const LINKS = [
   { href: "#about", label: "About" },
   { href: "#experience", label: "Experience" },
   { href: "#education", label: "Education" },
+  { href: "#research", label: "Research" },
   { href: "#skills", label: "Skills" },
   { href: "#projects", label: "Projects" },
   { href: "#detour", label: "Detour" },
@@ -87,7 +88,7 @@ export default function Nav() {
             <span className="h-2 w-2 rounded-full bg-accent" />
           </a>
 
-          <ul className="hidden items-center gap-1 sm:flex">
+          <ul className="hidden items-center gap-0.5 md:flex lg:gap-1">
             {LINKS.map((l) => {
               const isActive = active === l.href;
               const isContact = l.href === "#contact";
@@ -98,7 +99,7 @@ export default function Nav() {
                     href={l.href}
                     onClick={(e) => scrollTo(e, l.href)}
                     aria-current={isActive ? "true" : undefined}
-                    className={`relative flex items-center gap-1.5 rounded-full px-2.5 py-1 font-mono text-xs uppercase tracking-[0.15em] transition-colors ${
+                    className={`relative flex items-center gap-1.5 rounded-full px-2 py-1 font-mono text-xs uppercase tracking-[0.1em] transition-colors lg:px-2.5 lg:tracking-[0.15em] ${
                       isContact
                         ? "bg-accent text-background hover:bg-accent-hover"
                         : isActive
@@ -135,7 +136,7 @@ export default function Nav() {
             onClick={() => setMobileOpen((v) => !v)}
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}
-            className="flex h-7 w-7 items-center justify-center text-foreground sm:hidden"
+            className="flex h-7 w-7 items-center justify-center text-foreground md:hidden"
           >
             <svg
               width="20"
@@ -172,7 +173,7 @@ export default function Nav() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
-              className="mt-2 overflow-hidden rounded-2xl border border-border/80 bg-background/95 p-2 backdrop-blur-xl sm:hidden"
+              className="mt-2 overflow-hidden rounded-2xl border border-border/80 bg-background/95 p-2 backdrop-blur-xl md:hidden"
             >
               {LINKS.map((l) => {
                 const isContact = l.href === "#contact";

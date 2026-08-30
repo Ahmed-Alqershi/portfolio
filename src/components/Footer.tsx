@@ -57,7 +57,7 @@ export default function Footer() {
             </svg>
           </a>
           <a
-            href="mailto:contact@aalqershi.com"
+            href="mailto:alqershiahmed20@gmail.com"
             aria-label="Email"
             className="transition-colors hover:text-foreground"
           >

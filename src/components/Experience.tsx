@@ -7,9 +7,12 @@ import FadeIn from "./FadeIn";
 
 type Role = {
   title: string;
-  type: string;
+  /** Employment status. Omitted where no verified label applies. */
+  type?: string;
   period: string;
   location: string;
+  /** Optional description attached to this role rather than the company. */
+  note?: string;
 };
 type Company = {
   id: string;
@@ -17,70 +20,57 @@ type Company = {
   short: string;
   logo: string;
   logoClass?: string;
+  /** "earlier" roles render in a smaller, visually secondary row. */
+  tier: "primary" | "earlier";
   roles: Role[];
   blurb: ReactNode;
 };
 
 const COMPANIES: Company[] = [
   {
-    id: "kaizen",
-    name: "Kaizen Consulting",
-    short: "Kaizen",
-    logo: "/logos/kaizen.svg",
-    roles: [
-      {
-        title: "Technical Consultant",
-        type: "Full-time",
-        period: "2025 – Present",
-        location: "Riyadh, Saudi Arabia · Remote",
-      },
-    ],
-    blurb:
-      "Economic modelling and platform development. Built a CGE — computable general equilibrium — modelling platform, a Tourism Satellite Account toolkit for a Ministry of Tourism, and a structured tender-pricing platform for the firm's pricing team. Also ran product management across several products and led the team on two of them.",
-  },
-  {
     id: "gams",
-    name: "GAMS Development Corporation",
+    name: "GAMS Software GmbH",
     short: "GAMS",
     logo: "/logos/gams.png",
+    tier: "primary",
     roles: [
       {
         title: "Operations Research Analyst",
-        type: "Freelance",
-        period: "2023 – Present",
+        period: "January 2023 – Present",
         location: "Remote",
       },
       {
         title: "Operations Research Analyst",
-        type: "Internship",
-        period: "Sep – Dec 2022",
+        type: "Erasmus Trainee",
+        period: "September – December 2022",
         location: "Braunschweig, Germany",
+        note: "Researched multi-objective optimization and implemented an initial executable example based on the sandwich algorithm, together with technical presentations and documentation.",
       },
     ],
     blurb: (
       <>
-        I&apos;m part of the team behind GAMSPy, GAMS&apos;s Python
-        optimization library. There I built SDDP — GAMSPy&apos;s stochastic
-        optimization framework, inspired by{" "}
+        I work on GAMSPy, GAMS&apos;s Python modelling library. I am the core
+        developer and primary implementer of its{" "}
         <a
-          href="https://en.wikipedia.org/wiki/Stochastic_dynamic_programming"
+          href="https://gamspy.readthedocs.io/en/latest/user/sddp/sddp.html"
           target="_blank"
           rel="noreferrer noopener"
           className="link-underline text-foreground"
         >
-          Stochastic Dual Dynamic Programming
-        </a>
-        {" "}— extended its machine-learning framework with new features, and
-        contributed to its{" "}
+          SDDP framework
+        </a>{" "}
+        for multistage stochastic programs. I have also contributed
+        neural-network and ReLU formulations, bound propagation and
+        piecewise-linear APIs, the{" "}
         <a
           href="https://github.com/GAMS-dev/gamspy-examples/tree/master/models"
           target="_blank"
           rel="noreferrer noopener"
           className="link-underline text-foreground"
         >
-          models and examples
+          model library
         </a>
-        . I also work on{" "}
+        ,{" "}
         <a
           href="https://www.gams.com/latest/docs/UG_GAMSCONNECT.html"
           target="_blank"
@@ -88,50 +78,85 @@ const COMPANIES: Company[] = [
           className="link-underline text-foreground"
         >
           Connect
-        </a>
-        , GAMS&apos;s data-integration framework, adding new agents and
-        enhancing existing ones. Around that: new multi-objective optimization
-        algorithms and unit-test suites for the Python and C# APIs.
+        </a>{" "}
+        data-integration work, tests, documentation and bug fixes.
       </>
     ),
   },
   {
+    id: "kaizen",
+    name: "Kaizen Consulting",
+    short: "Kaizen",
+    logo: "/logos/kaizen.svg",
+    tier: "primary",
+    roles: [
+      {
+        title: "Economic Modelling and Software Development Consultant",
+        type: "Project-based, part-time",
+        period: "July 2025 – Present",
+        location: "Remote",
+      },
+    ],
+    blurb:
+      "I develop mathematical and economic models together with the software used to calibrate them, manage data, configure scenarios and inspect results. My projects include a dynamic CGE modelling platform, a Tourism Satellite Account toolkit for a national Ministry of Tourism and a structured tender-pricing platform. I have also managed products and led development work on two projects.",
+  },
+  {
     id: "stryker",
-    name: "Stryker",
+    name: "Stryker Corporation",
     short: "Stryker",
     logo: "/logos/stryker.svg",
+    tier: "primary",
     roles: [
       {
         title: "Continuous Improvement Intern",
         type: "Internship",
-        period: "2021 – 2022",
+        period: "June 2021 – May 2022",
         location: "Kayseri, Türkiye",
       },
     ],
     blurb:
-      "Led a Value Stream Mapping project, built a simulation model to test a Pull System, mined data with Excel and Python, shipped a web app for weekly demand scheduling, and automated 5S audit reporting.",
+      "During a year-long, 20-ECTS capstone, our plant-wide value-stream map identified the plastic-injection station as the main source of lead time. We built a Simio discrete-event model and used simulation–optimization for inventory and production decisions. My main contribution was integrating Simio with a Python/Gurobi scheduler through C# and a database.",
   },
   {
     id: "hes-kablo",
     name: "HES Kablo",
     short: "HES Kablo",
     logo: "/logos/hes-kablo.png",
+    tier: "primary",
     roles: [
       {
-        title: "Planning Intern",
+        title: "Production Planning Intern",
         type: "Internship",
-        period: "2020 – 2021",
+        period: "November 2020 – May 2021",
         location: "Kayseri, Türkiye",
       },
     ],
     blurb:
-      "Built a simulation model of the production line and used mathematical optimization for scheduling — including a novel algorithm that produces a near-optimal schedule in seconds. Built a Python UI for production planning; achieved a ~32% increase in production capacity.",
+      "Led a three-person production-scheduling project. A simulation of the full line identified three machines at approximately 98% utilization; we then modelled the resulting three-machine flow shop as a MILP. I developed a sub-second heuristic extending Johnson's rule and helped deliver the scheduling application. The plant study estimated a 32% increase in effective production capacity.",
+  },
+  {
+    id: "femas",
+    name: "Femas Metal",
+    short: "Femas",
+    logo: "/logos/femas.jpeg",
+    tier: "primary",
+    roles: [
+      {
+        title: "Project Lead",
+        type: "Part-time",
+        period: "February – May 2020",
+        location: "Kayseri, Türkiye",
+      },
+    ],
+    blurb:
+      "Led a three-person cutting-stock project. I enumerated feasible cutting patterns in Java and optimized their selection in GAMS, reducing trim loss by more than 80% compared with the previous cutting strategy.",
   },
   {
     id: "proceedit",
     name: "proceedit",
     short: "proceedit",
     logo: "/logos/proceedit.avif",
+    tier: "earlier",
     roles: [
       {
         title: "Operations Branch Head",
@@ -150,27 +175,12 @@ const COMPANIES: Company[] = [
       "Optimized business operations using Six Sigma techniques and simulation modelling.",
   },
   {
-    id: "femas",
-    name: "Femas Metal",
-    short: "Femas",
-    logo: "/logos/femas.jpeg",
-    roles: [
-      {
-        title: "Project Lead",
-        type: "Part-time",
-        period: "Feb – May 2020",
-        location: "Kayseri, Türkiye",
-      },
-    ],
-    blurb:
-      "Femas manufactures kitchen appliances — ovens, microwaves, and the like. Cutting their large steel rolls, an unoptimized process was bleeding material to trim loss. I led a team of three, studied the problem in depth, restructured the data around the solving approach, and cut the trim loss by over 80%.",
-  },
-  {
     id: "merkez-celik",
     name: "Merkez Çelik",
     short: "Merkez Çelik",
     logo: "/logos/merkez-celik.png",
     logoClass: "scale-[1.45]",
+    tier: "earlier",
     roles: [
       {
         title: "Engineer Intern",
@@ -184,9 +194,56 @@ const COMPANIES: Company[] = [
   },
 ];
 
+function LogoTile({
+  company,
+  selected,
+  onSelect,
+}: {
+  company: Company;
+  selected: boolean;
+  onSelect: () => void;
+}) {
+  // "earlier" roles stay in the same grid at the same size — keeping the
+  // 4-then-3 pyramid intact — and read as secondary through opacity alone.
+  const earlier = company.tier === "earlier";
+  return (
+    <button
+      type="button"
+      onClick={onSelect}
+      aria-pressed={selected}
+      aria-label={company.name}
+      className="group flex w-[calc(50%-6.5px)] flex-col items-center gap-2 outline-none sm:w-[calc(25%-9.5px)]"
+    >
+      <span
+        className={`flex h-24 w-full items-center justify-center overflow-hidden rounded-xl border bg-white p-4 transition-all duration-200 ${
+          selected
+            ? "border-accent ring-2 ring-accent ring-offset-2 ring-offset-background"
+            : `border-border group-hover:opacity-100 ${earlier ? "opacity-40" : "opacity-70"}`
+        }`}
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={company.logo}
+          alt={company.name}
+          className={`h-full w-full object-contain ${company.logoClass ?? ""}`}
+        />
+      </span>
+      <span
+        className={`text-center font-mono text-[11px] uppercase tracking-[0.12em] transition-colors ${
+          selected
+            ? "text-foreground"
+            : `group-hover:text-foreground ${earlier ? "text-muted/60" : "text-muted"}`
+        }`}
+      >
+        {company.short}
+      </span>
+    </button>
+  );
+}
+
 export default function Experience() {
-  const [active, setActive] = useState(0);
-  const company = COMPANIES[active];
+  const [activeId, setActiveId] = useState(COMPANIES[0].id);
+  const company = COMPANIES.find((c) => c.id === activeId) ?? COMPANIES[0];
 
   return (
     <section id="experience" className="mx-auto max-w-4xl px-6 py-20 sm:py-32">
@@ -207,43 +264,14 @@ export default function Experience() {
           I work(ed) with
         </p>
         <div className="flex flex-wrap justify-center gap-3">
-          {COMPANIES.map((c, i) => {
-            const selected = i === active;
-            return (
-              <button
-                key={c.id}
-                type="button"
-                onClick={() => setActive(i)}
-                aria-pressed={selected}
-                aria-label={c.name}
-                className="group flex w-[calc(50%-6.5px)] flex-col items-center gap-2 outline-none sm:w-[calc(25%-9.5px)]"
-              >
-                <span
-                  className={`flex h-24 w-full items-center justify-center overflow-hidden rounded-xl border bg-white p-4 transition-all duration-200 ${
-                    selected
-                      ? "border-accent ring-2 ring-accent ring-offset-2 ring-offset-background"
-                      : "border-border opacity-70 group-hover:opacity-100"
-                  }`}
-                >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={c.logo}
-                    alt={c.name}
-                    className={`h-full w-full object-contain ${c.logoClass ?? ""}`}
-                  />
-                </span>
-                <span
-                  className={`text-center font-mono text-[11px] uppercase tracking-[0.12em] transition-colors ${
-                    selected
-                      ? "text-foreground"
-                      : "text-muted group-hover:text-foreground"
-                  }`}
-                >
-                  {c.short}
-                </span>
-              </button>
-            );
-          })}
+          {COMPANIES.map((c) => (
+            <LogoTile
+              key={c.id}
+              company={c}
+              selected={c.id === activeId}
+              onSelect={() => setActiveId(c.id)}
+            />
+          ))}
         </div>
       </FadeIn>
 
@@ -266,13 +294,22 @@ export default function Experience() {
                   <div key={`${r.title}-${idx}`}>
                     <div className="font-medium">{r.title}</div>
                     <div className="mt-0.5 font-mono text-[11px] uppercase tracking-[0.15em] text-accent">
-                      {r.type}
-                      <span className="mx-2 text-border">·</span>
+                      {r.type && (
+                        <>
+                          {r.type}
+                          <span className="mx-2 text-border">·</span>
+                        </>
+                      )}
                       {r.period}
                     </div>
                     <div className="mt-0.5 font-mono text-[11px] uppercase tracking-[0.15em] text-muted">
                       {r.location}
                     </div>
+                    {r.note && (
+                      <p className="mt-2 text-sm leading-relaxed text-muted">
+                        {r.note}
+                      </p>
+                    )}
                   </div>
                 ))}
               </div>

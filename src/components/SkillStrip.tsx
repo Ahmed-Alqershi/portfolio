@@ -10,6 +10,11 @@ export type SkillCard = {
   title: string;
   caption: string;
   items: string[];
+  /** Short clarifier shown under the chips, where a flat list would overstate
+   *  or understate the actual depth. */
+  note?: string;
+  /** Supporting rather than core expertise: rendered visually quieter. */
+  secondary?: boolean;
 };
 
 export default function SkillStrip({ cards }: { cards: SkillCard[] }) {
@@ -103,13 +108,23 @@ export default function SkillStrip({ cards }: { cards: SkillCard[] }) {
             key={card.num}
             tabIndex={0}
             onFocus={onCardFocus}
-            className="card-glow flex h-[260px] w-[300px] shrink-0 snap-start flex-col rounded-2xl border border-border bg-surface p-5 sm:w-[320px]"
+            className={`card-glow flex min-h-[280px] w-[300px] shrink-0 snap-start flex-col rounded-2xl border p-5 sm:w-[320px] ${
+              card.secondary
+                ? "border-dashed border-border bg-background"
+                : "border-border bg-surface"
+            }`}
           >
             <div className="mb-3 flex items-baseline gap-3 font-mono text-[11px] uppercase tracking-[0.2em]">
-              <span className="text-accent">{card.num}</span>
+              <span className={card.secondary ? "text-muted" : "text-accent"}>
+                {card.num}
+              </span>
               <span className="h-px flex-1 bg-border" />
             </div>
-            <h3 className="text-base font-medium tracking-tight">
+            <h3
+              className={`text-base font-medium tracking-tight ${
+                card.secondary ? "text-muted" : ""
+              }`}
+            >
               {card.title}
             </h3>
             <p className="mt-1 mb-4 text-sm text-muted">{card.caption}</p>
@@ -117,12 +132,19 @@ export default function SkillStrip({ cards }: { cards: SkillCard[] }) {
               {card.items.map((item) => (
                 <li
                   key={item}
-                  className="rounded-full border border-border bg-background px-2.5 py-1 text-[13px] transition-colors hover:border-accent"
+                  className={`rounded-full border border-border px-2.5 py-1 text-[13px] transition-colors hover:border-accent ${
+                    card.secondary ? "bg-surface" : "bg-background"
+                  }`}
                 >
                   {item}
                 </li>
               ))}
             </ul>
+            {card.note && (
+              <p className="mt-auto pt-4 text-xs leading-relaxed text-muted">
+                {card.note}
+              </p>
+            )}
           </article>
         ))}
       </div>

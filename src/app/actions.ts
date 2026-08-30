@@ -85,7 +85,7 @@ export async function sendContact(
     return {
       status: "error",
       message:
-        "Email isn't wired up yet. Please email me directly at contact@aalqershi.com.",
+        "Email isn't wired up yet. Please email me directly at alqershiahmed20@gmail.com.",
     };
   }
 

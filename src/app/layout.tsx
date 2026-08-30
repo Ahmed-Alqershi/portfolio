@@ -22,25 +22,11 @@ const instrumentSerif = Instrument_Serif({
   subsets: ["latin"],
 });
 
-// SEO title — the positioning only. The site name above the URL in Google
-// search results comes from the WebSite schema (below), so the title doesn't
-// need to repeat "Ahmed Alqershi". Same line is also what the browser tab
-// shows.
-const TITLE =
-  "Mathematical Modelling, Artificial Intelligence & Software";
-// Social title is just the name — the image and description carry the
-// positioning, so the bold line in WhatsApp/LinkedIn previews reads like a
-// clean contact card rather than a résumé summary.
-const SOCIAL_TITLE = "Ahmed Alqershi";
-// SEO description — warm, conversational. Google may or may not use this
-// verbatim; it sometimes pulls more relevant text from the page itself.
+// Title, description and social copy all state the same positioning, so the
+// tab, the search result and a pasted link agree with each other.
+const TITLE = "Ahmed Alqershi | Operations Research & Stochastic Optimization";
 const DESCRIPTION =
-  "This is where I keep my work. Have a look around. Maybe we'll team up on something.";
-// Warm invitation for WhatsApp/LinkedIn/Twitter previews. The image already
-// carries the name, photo, logo, and positioning — the description doesn't
-// need to repeat any of that. It just extends a hand.
-const SOCIAL_DESCRIPTION =
-  "Welcome! This is where I keep my work. Have a look around. Maybe we'll team up on something.";
+  "Operations researcher and scientific-software developer working on stochastic optimization, GAMSPy, mathematical modelling and applied optimization.";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://aalqershi.com"),
@@ -51,25 +37,26 @@ export const metadata: Metadata = {
   creator: "Ahmed Alqershi",
   keywords: [
     "Ahmed Alqershi",
-    "mathematical modelling",
-    "machine learning",
     "operations research",
+    "stochastic optimization",
+    "stochastic programming",
+    "SDDP",
+    "Benders decomposition",
     "mathematical optimization",
+    "mathematical modelling",
+    "scientific software",
     "GAMS",
-    "Gurobi",
+    "GAMSPy",
+    "energy-system modelling",
     "CGE modelling",
     "computable general equilibrium",
-    "software engineering",
-    "Siamese neural networks",
-    "drug repositioning",
-    "Kaizen Consulting",
-    "consultant",
-    "freelance",
+    "simulation-optimization",
+    "machine learning",
   ],
   alternates: { canonical: "/" },
   openGraph: {
-    title: SOCIAL_TITLE,
-    description: SOCIAL_DESCRIPTION,
+    title: TITLE,
+    description: DESCRIPTION,
     url: "https://aalqershi.com",
     siteName: "Ahmed Alqershi · Portfolio",
     type: "website",
@@ -77,8 +64,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: SOCIAL_TITLE,
-    description: SOCIAL_DESCRIPTION,
+    title: TITLE,
+    description: DESCRIPTION,
   },
   // After deploy, add the Search Console code here:
   // verification: { google: "your-verification-code" },
@@ -108,31 +95,33 @@ const structuredData = {
         "https://www.linkedin.com/in/ahmed-alqershi/",
         "https://github.com/Ahmed-Alqershi",
       ],
-      jobTitle: ["Technical Consultant", "Operations Research Analyst"],
+      jobTitle: "Operations Research Analyst",
       worksFor: [
+        { "@type": "Organization", name: "GAMS Software GmbH" },
         { "@type": "Organization", name: "Kaizen Consulting" },
-        { "@type": "Organization", name: "GAMS Development Corporation" },
       ],
       alumniOf: {
         "@type": "CollegeOrUniversity",
         name: "Abdullah Gül University",
       },
       knowsAbout: [
-        "Mathematical Modelling",
         "Operations Research",
-        "Machine Learning",
-        "Mathematical Optimization",
-        "GAMS",
-        "Gurobi",
-        "Computable General Equilibrium",
-        "Mixed Integer Programming",
         "Stochastic Programming",
-        "Software Engineering",
+        "Stochastic Dual Dynamic Programming",
+        "Benders Decomposition",
+        "Mathematical Optimization",
+        "Mathematical Modelling",
+        "Energy System Modelling",
+        "GAMS",
+        "GAMSPy",
+        "Mixed Integer Programming",
+        "Discrete-Event Simulation",
+        "Computable General Equilibrium",
+        "Scientific Software",
         "Python",
-        "TypeScript",
       ],
       description:
-        "Independent consultant in mathematical modelling, machine learning, and the software around them.",
+        "Operations research analyst and scientific-software developer working on stochastic optimization, GAMSPy and mathematical modelling.",
     },
   ],
 };

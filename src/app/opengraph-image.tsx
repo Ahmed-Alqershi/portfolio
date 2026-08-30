@@ -3,7 +3,7 @@ import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 
 export const alt =
-  "Ahmed Alqershi — Modelling, Artificial Intelligence & Software";
+  "Ahmed Alqershi — Operations Research, Stochastic Optimization & Scientific Software";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -85,13 +85,13 @@ export default async function Image() {
           style={{
             display: "flex",
             marginTop: 16,
-            fontSize: 32,
+            fontSize: 28,
             fontWeight: 500,
             letterSpacing: -0.5,
             color: "#a5b4fc",
           }}
         >
-          Modelling · Artificial Intelligence · Software
+          Operations Research · Stochastic Optimization · Scientific Software
         </div>
       </div>
     ),

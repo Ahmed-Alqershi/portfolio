@@ -83,15 +83,14 @@ export default function Hero() {
           initial={{ opacity: 0, y: -8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="mb-10 flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.25em] text-muted"
+          className="mb-10 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 font-mono text-[11px] uppercase tracking-[0.25em] text-muted"
         >
-          <span className="relative flex h-2 w-2">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-60" />
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
-          </span>
-          Available for work
+          <span className="h-1.5 w-1.5 rounded-full bg-accent" aria-hidden />
+          Operations Research
           <span className="text-border">·</span>
-          Open to remote
+          Stochastic Optimization
+          <span className="text-border">·</span>
+          Scientific Software
         </motion.div>
 
         <motion.h1
@@ -134,11 +133,9 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 1.3 }}
           className="mt-6 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 font-mono text-[11px] uppercase tracking-[0.2em] text-muted"
         >
-          <span>Modelling</span>
+          <span>Based in Türkiye</span>
           <span className="text-border">·</span>
-          <span>Machine Learning</span>
-          <span className="text-border">·</span>
-          <span>Software</span>
+          <span>Open to relocation</span>
         </motion.p>
 
         <motion.div
@@ -148,8 +145,8 @@ export default function Hero() {
           className="mt-12 flex flex-col items-center gap-3 sm:flex-row"
         >
           <a
-            href="#projects"
-            onClick={(e) => scrollTo(e, "#projects")}
+            href="#research"
+            onClick={(e) => scrollTo(e, "#research")}
             className="group inline-flex items-center gap-2 rounded-full bg-foreground px-5 py-2.5 font-mono text-xs uppercase tracking-[0.15em] text-background btn-lift"
           >
             See my work
@@ -180,8 +177,8 @@ export default function Hero() {
         </motion.div>
 
         <motion.a
-          href="/ahmed-alqershi-cv.pdf"
-          download
+          href="/Ahmed_Alqershi_Academic_CV.pdf"
+          download="Ahmed_Alqershi_Academic_CV.pdf"
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 1.9 }}

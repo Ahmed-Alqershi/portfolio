@@ -1,26 +1,50 @@
 import SectionLabel from "./SectionLabel";
 import FadeIn from "./FadeIn";
 
-const DEGREES = [
+type Degree = {
+  title: string;
+  level: string;
+  year: string;
+  institution: string;
+  period: string;
+  facts: string[];
+  blurb: string;
+  gpa: string;
+  honors: string[];
+};
+
+const DEGREES: Degree[] = [
   {
     title: "Industrial Engineering",
-    level: "BSc",
+    level: "B.Sc.",
     year: "2022",
+    institution: "Abdullah Gül University",
+    period: "August 2018 – June 2022",
+    facts: ["245 ECTS", "Taught and examined entirely in English"],
     blurb:
-      "The foundations — operations research, optimization, and the discipline of making real systems run efficiently.",
-    gpa: "3.84 / 4.0",
-    honor: "First in class",
+      "Completed 57 ECTS in operations research and optimization, including Stochastic Models, Deterministic Optimization, Mathematical Modeling, System Simulation and Decision and Risk Analysis; also completed 32 ECTS of supervised industrial work.",
+    gpa: "3.84 / 4.00",
+    honors: ["High Honour", "First-ranked graduate, 2022"],
   },
   {
-    title: "Computer Engineering",
-    level: "MSc · AI",
+    title: "Electrical and Computer Engineering",
+    level: "M.Sc.",
     year: "2025",
+    institution: "Abdullah Gül University",
+    period: "September 2023 – May 2025",
+    facts: [
+      "120 ECTS",
+      "Thesis-based degree, taught and examined entirely in English",
+    ],
     blurb:
-      "Specialized in artificial intelligence — with a thesis on drug repositioning using Siamese neural networks.",
-    gpa: "3.96 / 4.0",
-    honor: "High honors",
+      "Designed a TensorFlow/Keras pipeline combining SemMedDB relations, FastText embeddings and Siamese neural networks. Evaluated 576 experimental configurations; the selected model reached 87.66% validation accuracy and 83.2% test accuracy.",
+    gpa: "3.96 / 4.00",
+    honors: [],
   },
 ];
+
+const THESIS =
+  "Neural Insights into Drug Repositioning: A Literature-Based Framework Using Word Embeddings and Siamese Networks";
 
 export default function Education() {
   return (
@@ -29,10 +53,9 @@ export default function Education() {
 
       <FadeIn>
         <p className="mb-12 max-w-xl text-lg leading-relaxed sm:text-xl">
-          My education traces one idea across two fields:{" "}
-          <span className="font-serif italic text-accent">optimization</span>,
-          then{" "}
-          <span className="font-serif italic text-accent">intelligence</span>.
+          An operations-research foundation, then the{" "}
+          <span className="font-serif italic text-accent">computational</span>{" "}
+          side of it — both degrees taught and examined in English.
         </p>
       </FadeIn>
 
@@ -61,14 +84,52 @@ export default function Education() {
                   {d.level}
                 </span>
               </div>
+              <div className="mt-1.5 flex flex-wrap gap-x-2 font-mono text-[11px] uppercase tracking-[0.15em] text-muted">
+                <span>{d.institution}</span>
+                {/* Separator travels with the period, and the period never
+                    splits across lines mid-range. */}
+                <span className="whitespace-nowrap">
+                  <span aria-hidden className="mr-2 text-border">
+                    ·
+                  </span>
+                  {d.period}
+                </span>
+              </div>
+
+              <ul className="mt-3 space-y-1 text-sm text-muted">
+                {d.facts.map((f) => (
+                  <li key={f} className="flex gap-2">
+                    <span aria-hidden className="text-border">
+                      —
+                    </span>
+                    <span>{f}</span>
+                  </li>
+                ))}
+              </ul>
+
+              {d.level === "M.Sc." && (
+                <p className="mt-3 text-sm leading-relaxed text-muted">
+                  Thesis (45 ECTS):{" "}
+                  <span className="font-serif italic text-foreground">
+                    {THESIS}
+                  </span>
+                </p>
+              )}
+
               <p className="mt-3 leading-relaxed text-muted">{d.blurb}</p>
+
               <div className="mt-4 flex flex-wrap items-center gap-3">
                 <span className="font-mono text-sm tabular-nums text-accent">
                   GPA {d.gpa}
                 </span>
-                <span className="rounded-full border border-border px-3 py-1 font-mono text-[11px] uppercase tracking-[0.15em] text-muted">
-                  {d.honor}
-                </span>
+                {d.honors.map((h) => (
+                  <span
+                    key={h}
+                    className="rounded-full border border-border px-3 py-1 font-mono text-[11px] uppercase tracking-[0.15em] text-muted"
+                  >
+                    {h}
+                  </span>
+                ))}
               </div>
             </div>
           ))}

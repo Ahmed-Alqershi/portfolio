@@ -12,7 +12,7 @@ export default function Contact() {
 
   return (
     <section id="contact" className="mx-auto max-w-4xl px-6 py-20 sm:py-32">
-      <SectionLabel number="07" title="Contact" />
+      <SectionLabel number="08" title="Contact" />
       <FadeIn delay={0.1}>
         <form
           action={formAction}
@@ -114,10 +114,10 @@ export default function Contact() {
         <p className="mt-12 text-sm text-muted">
           Or just email me at{" "}
           <a
-            href="mailto:contact@aalqershi.com"
+            href="mailto:alqershiahmed20@gmail.com"
             className="link-underline text-foreground"
           >
-            contact@aalqershi.com
+            alqershiahmed20@gmail.com
           </a>
           .
         </p>

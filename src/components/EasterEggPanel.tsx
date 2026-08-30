@@ -22,10 +22,11 @@ export default function EasterEggPanel() {
               You found it.
             </h3>
             <p className="mt-3 text-muted">
-              Fun fact: I once spent a weekend writing a Django middleware that
-              logged every SQL query just to win an argument about an N+1 bug.
-              I won the argument. (Replace this with your own — see{" "}
-              <code className="font-mono text-foreground">EasterEggPanel.tsx</code>.)
+              Since you&apos;re poking around: the Detour puzzle solves two
+              NP-hard problems, not one. The same Held–Karp table gives both the
+              optimal closed tour and the best value-bounded subset — which is
+              why it can tell you exactly how far off you were. Ten cities keeps
+              it instant; twenty-five would not.
             </p>
           </div>
           <button
